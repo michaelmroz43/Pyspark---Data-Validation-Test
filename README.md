@@ -1,6 +1,6 @@
 # 🏎️ PySpark Data Quality for Racing Data 🏎️
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Python 3.9.11](https://img.shields.io/badge/Python-3.9.11-blue.svg?logo=python&logoColor=white)](https://www.python.org/downloads/release/python-3911/)
 [![Spark](https://img.shields.io/badge/Apache%20Spark-3.x-orange.svg)](https://spark.apache.org/)
 [![Status](https://img.shields.io/badge/Report-HTML-green.svg)](#outputs)
 
