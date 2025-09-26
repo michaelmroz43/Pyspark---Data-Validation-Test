@@ -28,7 +28,7 @@ A small, focused PySpark job that validates a racing telemetry CSV, fixes column
 
 ## Requirements
 
-- Python **3.8+**
+- Python **3.9.11**
 - Java **8 or 11**
 - Apache Spark **3.x**
 - PySpark
