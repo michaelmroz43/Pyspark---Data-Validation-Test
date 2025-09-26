@@ -1,2 +1,39 @@
-# Pyspark---Data-Validation-Test
-Loads racing CSV into Spark, cleans column names, and runs data checks: required cols, PK uniqueness, 13-digit timestamps, laps/time non-decreasing per car, value ranges, tyre domain, and wet-tyre rule (sensor_0008_val 100–250). Outputs HTML report and CSV violations.
+# 🏎️ PySpark Data Quality for Racing Data 🏎️
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Spark](https://img.shields.io/badge/Apache%20Spark-3.x-orange.svg)](https://spark.apache.org/)
+[![Status](https://img.shields.io/badge/Report-HTML-green.svg)](#outputs)
+
+A small, focused PySpark job that validates a racing telemetry CSV, fixes column names, runs a handful of integrity checks, and generates a clean HTML report + per-check CSVs of violations.
+
+---
+
+## What it does
+
+- Cleans header names (strips whitespace, converts spaces → underscores)
+- Runs data-quality checks:
+  - **Required columns present**: `event_id, session, lap, timestamp_ms, driver, team, car_no, tyre`
+  - **Primary-key uniqueness** on `event_id, session, car_no, lap`
+  - **Timestamp format**: `timestamp_ms` must be **13 digits**
+  - **Monotonicity per car**: laps don’t go backwards; timestamps don’t decrease within `(event_id, session, car_no)`
+  - **Reasonable ranges**  
+    - `air_temp_c ∈ [0, 30]`  
+    - `track_temp_c ∈ [-20, 80]`  
+    - `battery_soc ∈ [0.6, 40]`  
+    - `fuel_kg ≥ 0`
+  - **Conditional rule**: if `tyre == "Wet"`, then `sensor_0008_val ∈ [100, 250]`
+  - **Domain check**: `tyre ∈ {Soft, Medium, Hard, Wet, Intermediate}`
+
+---
+
+## Requirements
+
+- Python **3.8+**
+- Java **8 or 11**
+- Apache Spark **3.x**
+- PySpark
+
+```bash
+pip install pyspark
+# verify
+python -c "import pyspark; print(pyspark.__version__)"
