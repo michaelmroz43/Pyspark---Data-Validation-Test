@@ -15,7 +15,7 @@ A small, focused PySpark job that validates a racing telemetry CSV, fixes column
   - **Required columns present**: `event_id, session, lap, timestamp_ms, driver, team, car_no, tyre`
   - **Primary-key uniqueness** on `event_id, session, car_no, lap`
   - **Timestamp format**: `timestamp_ms` must be **13 digits**
-  - **Monotonicity per car**: laps don’t go backwards; timestamps don’t decrease within `(event_id, session, car_no)`
+  - **For each car**: verify laps don’t go backwards; timestamps don’t decrease within `(event_id, session, car_no)`
   - **Reasonable ranges**  
     - `air_temp_c ∈ [0, 30]`  
     - `track_temp_c ∈ [-20, 80]`  
